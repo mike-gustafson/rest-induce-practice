@@ -7,7 +7,7 @@ This project demonstrates the implementation of a RESTful API for managing a col
 ## Features
 
 - **RESTful API**: Implements all RESTful routes for managing a book collection.
-- **Server-Side Rendering**: Uses EJS templates for dynamic rendering of book data.
+- **Server-Side Rendering**: Dynamically generates HTML using EJS templates, displaying book information and supporting interactive user input.
 - **Middleware Integration**:
   - **Morgan**: Logs HTTP requests for debugging and monitoring.
   - **Express**: Handles core HTTP routing and request parsing.
@@ -75,3 +75,29 @@ This project demonstrates the implementation of a RESTful API for managing a col
    ```bash
    git clone https://github.com/mike-gustafson/rest-induce-practice.git
    cd rest-induce-practice
+   ```
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Run the Server**
+   ```bash
+   node server.js
+   ```
+
+4. **Access the Application**
+   - Open your browser and navigate to `http://localhost:3000` to interact with the application.
+
+---
+
+## Future Enhancements
+- Connect the API to a persistent database (e.g., MongoDB, PostgreSQL) for data storage.
+- Add user authentication and authorization for secure access.
+- Implement client-side interactivity with JavaScript frameworks like React or Vue.js.
+
+---
+
+## What I Learned
+Through this project, I gained a strong foundation in RESTful API development and server-side rendering. I also improved my debugging skills, middleware configuration, and understanding of dynamic data handling. This project reflects my ability to build scalable, maintainable backend solutions while adhering to industry-standard practices.

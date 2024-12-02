@@ -18,7 +18,6 @@ app.set('views', './views');
 
 // I - Index
 app.get('/', (req, res) => {
-    //  res.send('Hello World');\
     res.render('home', { title: 'Library' });
 })
 
