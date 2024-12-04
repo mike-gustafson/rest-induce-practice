@@ -62,9 +62,12 @@ app.delete('/books/:id', (req, res) => {
 app.put('/books/:id', (req, res) => {
     const bookId = parseInt(req.params.id);
     const bookIndex = books.findIndex(book => book.id === bookId)
+    console.log(bookIndex)
     if (bookIndex !== -1) {
-        books[bookIndex] = { ...books[bookIndex], ...req.body }
-        res.status(200).redirect(`/books`)
+        for (const key in req.body) {
+            books[bookIndex][key] = req.body[key];
+        }
+        res.status(200).redirect('/books')
     } else {
         res.status(404).render('404/notFound', { title: 'Book Not Found' })
     }
@@ -89,7 +92,12 @@ app.post('/books', (req, res) => {
 
 // E - Edit
 app.get('/books/:id/edit', (req, res) => {
-    res.send('Edit');
+    const book = books.find(book => book.id === Number(req.params.id));
+    if (book) {
+        res.render('book/edit', { title: 'Edit Book', book: book });
+    } else {
+        res.status(404).render('404/notFound', { title: 'Book Not Found' });
+    }
 })
 
 app.listen(PORT, () => {
