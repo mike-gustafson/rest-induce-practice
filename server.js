@@ -43,15 +43,19 @@ app.get('/books/:id', (req, res) => {
 app.post('/books/new', (req, res) => {
     const newBook = { id: books.length + 1, title: 'New Book', author: 'New Author' };
     books.push(newBook);
+    console.log(books);
     const response = `New book created: ${newBook.title} by ${newBook.author}`;
     res.send(response);
 })
 
 // D - Delete
 app.delete('/books/:id', (req, res) => {
-    const book = books.find(book => book.id === Number(req.params.id));
-    const response = book ? `Deleted ${book.title}` : 'Book not found';
-    res.send(response);
+    const bookIdx = books.findIndex(book => book.id === Number(req.params.id));
+    const book = books[bookIdx];
+    if (book) {
+        books.splice(bookIdx, 1);
+    }
+    res.redirect('/books');
 })
 
 // U - Update
