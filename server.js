@@ -27,12 +27,13 @@ app.get('/books', (req, res) => {
 
 
 app.get('/books/new', (req, res) => {
-    res.send('New');
+    res.render('book/new.ejs', { title: 'New Book' });
 })
+
 app.get('/books/:id', (req, res) => {
     const book = books.find(book => book.id === Number(req.params.id));
     if (book) {
-        res.send(book);
+        res.render('show', { title: book.title, book: book });
     } else {
         res.status(404).json({ message: 'Book not found' });
     }
@@ -73,12 +74,14 @@ app.put('/books/:id', (req, res) => {
 app.post('/books', (req, res) => {
     const newBook = { 
         id: books.length + 1,
-        title: req.params.title, 
-        author: req.params.author };
-    
+        title: req.body.title, 
+        author: req.body.author,
+        published: req.body.published || '',
+        description: req.body.description || '',
+    };
     if (newBook.title && newBook.author) {
         books.push(newBook);
-        res.send(`Created book: ${newBook.title} by ${newBook.author}`);
+        res.status(201).redirect('/books');
     } else {
         res.status(400).json({ message: 'Invalid book' });
     }
