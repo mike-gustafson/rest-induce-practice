@@ -60,17 +60,13 @@ app.delete('/books/:id', (req, res) => {
 
 // U - Update
 app.put('/books/:id', (req, res) => {
-    const bookId = Number(req.params.id);
-    const bookIdx = books.findIndex(book => book.id === bookId);
-    
-    if (bookIdx !== -1) {
-        const book = books[bookIdx];
-        const bookUpdates = req.body;
-        books[bookIdx] = { ...book, ...bookUpdates };
-        const response = `Updated book: ${book.title}`;
-        res.send(response);
+    const bookId = parseInt(req.params.id);
+    const bookIndex = books.findIndex(book => book.id === bookId)
+    if (bookIndex !== -1) {
+        books[bookIndex] = { ...books[bookIndex], ...req.body }
+        res.status(200).redirect(`/books`)
     } else {
-        res.status(404).json({ message: 'Book not found' });
+        res.status(404).render('404/notFound', { title: 'Book Not Found' })
     }
 })
 
