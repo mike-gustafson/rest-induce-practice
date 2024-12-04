@@ -33,7 +33,7 @@ app.get('/books/new', (req, res) => {
 app.get('/books/:id', (req, res) => {
     const book = books.find(book => book.id === Number(req.params.id));
     if (book) {
-        res.render('book/details', { title: book.title, book: book });
+        res.render('book/show', { title: book.title, book: book });
     } else {
         res.status(404).render('404/notFound', { title: 'Book Not Found' });
     }
