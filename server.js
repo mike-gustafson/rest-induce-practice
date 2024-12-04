@@ -50,12 +50,14 @@ app.post('/books/new', (req, res) => {
 
 // D - Delete
 app.delete('/books/:id', (req, res) => {
-    const bookIdx = books.findIndex(book => book.id === Number(req.params.id));
-    const book = books[bookIdx];
-    if (book) {
+    const bookId = parseInt(req.params.id);
+    const bookIdx = books.findIndex(book => book.id === bookId);
+    if (bookIdx !== -1) {
         books.splice(bookIdx, 1);
+    } else {
+        res.status(404).render('404/notFound', { title: 'Book Not Found' });
     }
-    res.redirect('/books');
+    res.status(200).redirect('/books');
 })
 
 // U - Update
