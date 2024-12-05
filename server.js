@@ -1,12 +1,16 @@
-const methodOverride = require('method-override');
-const express = require('express');
-const morgan = require('morgan');
-const books = require('./data/books.js');
-const mongoose = require('mongoose');
 require('dotenv').config();
 
+const morgan = require('morgan');
+const express = require('express');
+const methodOverride = require('method-override');
+
+const books = require('./data/books.js');
+const PORT = process.env.PORT;
+const Book = require('./models/book');
 const app = express();
-const PORT = 3000;
+
+// configure mongoose
+require('./config/database');
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -15,13 +19,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.set('view engine', 'ejs');
 app.set('views', './views');
-
-mongoose.connect(process.env.MONGO_URI, {
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((err) => {
-    console.log(err);
-})
 
 // I.N.D.U.C.E. routes
 
@@ -53,6 +50,16 @@ app.post('/books/new', (req, res) => {
     books.push(newBook);
     const response = `New book created: ${newBook.title} by ${newBook.author}`;
     res.send(response);
+})
+
+app.post('/seed', async (req, res) => {
+    try {
+        await Book.insertMany(books);
+        res.send('Database seeded');
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
 })
 
 // D - Delete
