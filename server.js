@@ -2,6 +2,8 @@ const methodOverride = require('method-override');
 const express = require('express');
 const morgan = require('morgan');
 const books = require('./data/books.js');
+const mongoose = require('mongoose');
+require('dotenv').config();
 
 const app = express();
 const PORT = 3000;
@@ -14,6 +16,13 @@ app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+mongoose.connect(process.env.MONGO_URI, {
+}).then(() => {
+    console.log('Connected to MongoDB');
+}).catch((err) => {
+    console.log(err);
+})
+
 // I.N.D.U.C.E. routes
 
 // I - Index
@@ -24,7 +33,6 @@ app.get('/', (req, res) => {
 app.get('/books', (req, res) => {
     res.render('book', { title: "Book List", books: books });
 })
-
 
 app.get('/books/new', (req, res) => {
     res.render('book/new.ejs', { title: 'New Book' });
@@ -43,7 +51,6 @@ app.get('/books/:id', (req, res) => {
 app.post('/books/new', (req, res) => {
     const newBook = { id: books.length + 1, title: 'New Book', author: 'New Author' };
     books.push(newBook);
-    console.log(books);
     const response = `New book created: ${newBook.title} by ${newBook.author}`;
     res.send(response);
 })
