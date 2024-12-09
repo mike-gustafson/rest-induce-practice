@@ -1,6 +1,5 @@
 const Book = require('../models/book');
 const books = require('../data/books');
-const { application } = require('express');
 
 async function seed(req, res) {
     try {
