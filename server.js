@@ -33,4 +33,5 @@ app.use((req, res) => {
 // listen on port XXXX
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
+    console.log('Press Ctrl-C to terminate or type "rs" and press <enter> to restart"...');
 });
