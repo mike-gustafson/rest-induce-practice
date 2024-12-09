@@ -71,3 +71,17 @@ exports.update = async (req, res) => {
         res.status(500).send('Server Error');
     }
 };
+
+exports.edit = async (req, res) => {
+    try {
+        const book = await Book.findById(req.params.id);
+        if (book) {
+            res.render('book/edit', { title: 'Edit Book', book });
+        } else {
+            res.status(404).render('404/notFound', { title: 'Book Not Found' });
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+}
