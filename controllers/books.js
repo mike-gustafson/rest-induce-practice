@@ -13,7 +13,8 @@ exports.index = async (req, res) => {
 
 exports.show = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
+        const { id } = req.params;
+        const book = await Book.findById(id);
         if (book) {
             res.render('book/show', { title: book.title, book });
         } else {
@@ -33,7 +34,8 @@ exports.addNew = (req, res) => {
 // Destroy - delete data
 exports.delete = async (req, res) => {
     try {
-        const book = await Book.findByIdAndDelete(req.params.id);
+        const { id } = req.params;
+        const book = await Book.findByIdAndDelete(id);
         if (book) {
             res.status(200).redirect('/books');
         } else {
@@ -48,7 +50,8 @@ exports.delete = async (req, res) => {
 // Update - update data in the database
 exports.update = async (req, res) => {
     try {
-        const book = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const { id } = req.params;
+        const book = await Book.findByIdAndUpdate(id, req.body);
         if (book) {
             res.status(200).redirect('/books');
         } else {
@@ -63,12 +66,8 @@ exports.update = async (req, res) => {
 // Create - create new data in the database
 exports.create = async (req, res) => {
     try {
-        const newBook = new Book({
-            title: req.body.title,
-            author: req.body.author,
-            published: req.body.published,
-            description: req.body.description,
-        });
+        const { title, author, published, description } = req.body;
+        const newBook = new Book({ title, author, published, description });
         await newBook.save();
         res.status(201).redirect('/books');
     } catch (err) {
@@ -80,7 +79,8 @@ exports.create = async (req, res) => {
 // Edit - display form to edit data
 exports.edit = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
+        const { id } = req.params;
+        const book = await Book.findById(id);
         if (book) {
             res.render('book/edit', { title: 'Edit Book', book });
         } else {
