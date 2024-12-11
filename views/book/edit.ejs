@@ -1,54 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= title %></title>
-    <%- include('../partials/head') %>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>
+    <%= title %>
+  </title>
+  <%- include('../partials/head') %>
 </head>
+
 <body>
-    <%- include('../partials/nav') %>
-    
+  <%- include('../partials/nav') %>
+
     <div class="container" id="bottomMargin">
-        <h1 class="center-align"><%= book.title %></h1>
-        <form action="/books/<%= book.id %>?_method=PUT" method="POST" style="display: inline">
-            <div class="row">
-                <div class="input-field col s12">
-                  <input type="text" name="title" id="title" value="<%= book.title %>" required>
-                  <label for="title">Title</label>
-                </div>
-            </div>
-             <div class="row">
-                <div class="input-field col s12">
-                  <input type="text" name="author" id="author" value="<%= book.author %>" required>
-                  <label for="author">Author</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                  <input type="text" name="published" id="published" value="<%= book.published %>" required>
-                  <label for="published">Published</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                  <input type="text" name="coverImage" id="coverImage" value="<%= book.coverImage %>" required>
-                  <label for="coverImage">Cover Image</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                  <textarea name="description" id="description" class="materialize-textarea" required><%= book.description %></textarea>
-                  <label for="description">Description</label>
-                </div>
-            </div>
-            <div class="row center-align">
-            <button type="submit" class="btn wave-effect waves-light teal">Update Book</button>
-        </form>
-        <a href="/books" class="btn waves-effect waves-light orange">Back</a>
+      <h1 class="center-align">
+        <%= book.title %>
+      </h1>
+      <form action="/books/<%= book.id %>?_method=PUT" method="POST" style="display: inline">
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="title" id="title" value="<%= book.title %>" required>
+            <label for="title">Title</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="author" id="author" value="<%= book.author %>" required>
+            <label for="author">Author</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="published" id="published" value="<%= book.published %>" required>
+            <label for="published">Published</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <input type="text" name="coverImage" id="coverImage" value="<%= book.coverImage %>" required>
+            <label for="coverImage">Cover Image</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea name="description" id="description" class="materialize-textarea"
+              required><%= book.description %></textarea>
+            <label for="description">Description</label>
+          </div>
+        </div>
+        <div class="row center-align">
+          <button type="submit" class="btn wave-effect waves-light teal">Update Book</button>
+      </form>
+      <a href="/books" class="btn waves-effect waves-light orange">Back</a>
+      <button data-target="modal1" class="btn modal-trigger red darken-1">Delete Book</button>
+
+    </div>
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4>Delete Book</h4>
+        <p>Are you sure you want to delete this book?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancel</a>
         <form action="/books/<%= book.id %>?_method=DELETE" method="POST" style="display: inline">
-            <button type="submit" class="btn red darken-1">Delete Book</button>
+          <button type="submit" class="btn red darken-1">Delete Book</button>
         </form>
+      </div>
     </div>
 </body>
+
 </html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var elems = document.querySelectorAll('.modal');
+    M.Modal.init(elems);
+  });
+</script>
