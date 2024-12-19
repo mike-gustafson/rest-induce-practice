@@ -1,5 +1,15 @@
 <nav>
     <div class="nav-wrapper blue darken-1">
-        <a href="/" class="brand-logo center">Library📚</a>
+        <a href="/" class="brand-logo">Library</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <% if (session && session.user) { %>
+                <li><a href="/books">Books</a></li>
+                <li><a href="/users">Account</a></li>
+                <li><a href="/auth/logout">Logout</a></li>
+            <% } else { %>
+                <li><a href="/">Login</a></li>
+                <li><a href="/auth/register">Register</a></li>
+            <% } %>
+        </ul>
     </div>
 </nav>

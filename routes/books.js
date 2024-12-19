@@ -1,23 +1,13 @@
 const router = require('express').Router();
 const booksController = require('../controllers/books');
+const { ensureAuthenticated } = require('../middleware/auth');
 
-// Index - display data
-router.get('/', booksController.index);
-router.get('/:id', booksController.show);
-
-// New - display form to create new data
-router.get('/new', booksController.addNew);
-
-// Destroy - delete data
-router.delete('/:id', booksController.delete);
-
-// Update - update data in the database
-router.put('/:id', booksController.update);
-
-// Create - create new data in the database
-router.post('/', booksController.create);
-
-// Edit - display form to edit data
-router.get('/:id/edit', booksController.edit);
+router.get('/', ensureAuthenticated, booksController.index);
+router.get('/:id', ensureAuthenticated, booksController.show);
+router.get('/new', ensureAuthenticated, booksController.addNew);
+router.delete('/:id', ensureAuthenticated, booksController.delete);
+router.put('/:id', ensureAuthenticated, booksController.update);
+router.post('/', ensureAuthenticated, booksController.create);
+router.get('/:id/edit', ensureAuthenticated, booksController.edit);
 
 module.exports = router;

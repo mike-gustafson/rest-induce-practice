@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('../partials/head') %>
+    <title><%= title %></title>
+</head>
+<body>
+    <%- include('../partials/nav') %>
+    <h1>Delete Account</h1>
+    <p>Are you sure you want to delete your account?</p>
+    <form action="?_method=DELETE" method="POST">
+        <button type="submit" class="btn">Delete</button>
+    </form> 
+</body>

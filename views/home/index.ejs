@@ -3,17 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <%- include('../partials/head') %>
-    <title>Library📚</title>
+    <title><%= title %> 📚</title>
+    <%- include('../partials/head') %>
 </head>
 <body>
-<%- include('../partials/nav') %>
+    <%- include('../partials/nav') %>
 
-<div class="container">
-    <div class="center-align" style="margin-top: 40px;">
+    <div class="container">
+        <% if (username) { %>
+            <h1>User Logged In</h1>
+            <h2>Welcome, <%= username %></h2>
+            <a href="/auth/logout" class="btn blue darken-1">Sign Out</a>
+        <% } else { %>
+            <form action="/auth/login" method="POST">
+              <label for="username">Username:</label>
+              <input type="text" name="username" id="username" />
+              <label for="password">Password:</label>
+              <input type="password" name="password" id="password" />
+              <button type="submit" class="btn blue darken-1">Login</button>
+              <a href="/auth/register" class="btn blue darken-1">Register</a>
+            </form>
+            <br>
+            
+
+        <% } %>
         <a href="/books" class="btn blue darken-1">Go to Books Page</a>
     </div>
-    </div>
-    
 </body>
 </html>
