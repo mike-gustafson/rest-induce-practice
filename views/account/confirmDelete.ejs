@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include('../partials/head') %>
-    <title><%= title %></title>
+        <title>
+            <%= title %>
+        </title>
 </head>
+
 <body>
     <%- include('../partials/nav') %>
-    <h1>Delete Account</h1>
-    <p>Are you sure you want to delete your account?</p>
-    <form action="?_method=DELETE" method="POST">
-        <button type="submit" class="btn">Delete</button>
-    </form> 
+        <div class="container">
+            <div class="card">
+                <div class="card-content">
+                    <header>
+                        <h1>Confirm Account Deletion</h1>
+                        <h4>This cannot be undone!</h4>
+                    </header>
+                    <p>Are you sure you want to delete your account?</p>
+                    <form action="?_method=DELETE" method="POST">
+                        <button type="submit" class="btn">Delete</button>
+                    </form>
+                    <a href="/users" class="btn">Cancel</a>
+                </div>
+            </div>
 </body>

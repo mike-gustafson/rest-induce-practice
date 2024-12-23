@@ -9,12 +9,19 @@
 <body>
     <%- include('../partials/nav') %>
 
-    <div class="container">
+    <div class="container">        <div class="container">
+        <div class="card">
+            <div class="card-content">
+                <header>
         <% if (username) { %>
             <h1>User Logged In</h1>
             <h2>Welcome, <%= username %></h2>
+            
+        </header>
             <a href="/auth/logout" class="btn blue darken-1">Sign Out</a>
         <% } else { %>
+            
+        </header>
             <form action="/auth/login" method="POST">
               <label for="username">Username:</label>
               <input type="text" name="username" id="username" />

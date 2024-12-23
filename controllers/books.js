@@ -1,4 +1,5 @@
 const Book = require('../models/book');
+const User = require('../models/user');
 
 // Index - display data
 exports.index = async (req, res) => {
@@ -51,7 +52,14 @@ exports.delete = async (req, res) => {
 exports.update = async (req, res) => {
     try {
         const { id } = req.params;
-        const book = await Book.findByIdAndUpdate(id, req.body);
+        const updatedBook = {
+            title: req.body.title,
+            author: req.body.author,
+            published: req.body.published,
+            description: req.body.description,
+            updatedBy: req.session.user._id,
+        };
+        const book = await Book.findByIdAndUpdate(id, updatedBook);
         if (book) {
             res.status(200).redirect('/books');
         } else {
@@ -66,8 +74,16 @@ exports.update = async (req, res) => {
 // Create - create new data in the database
 exports.create = async (req, res) => {
     try {
-        const { title, author, published, description } = req.body;
-        const newBook = new Book({ title, author, published, description });
+        const { title, author, published, description, createdBy } = req.body;
+        const newBook = new Book({
+            title,
+            author,
+            published: published || 'Unknown',
+            description: description || '',
+            createdBy: req.session.user._id,
+            updatedBy: req.session.user._id,
+        });
+        
         await newBook.save();
         res.status(201).redirect('/books');
     } catch (err) {

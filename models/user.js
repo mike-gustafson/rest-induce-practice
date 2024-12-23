@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
   email: String,
   firstName: String,
   lastName: String,
+  location: String,
 });
 
 const User = mongoose.model("User", userSchema);

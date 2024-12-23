@@ -1,28 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include('../partials/head') %>
-    <title><%= title %></title>
+        <title>
+            <%= title %>
+        </title>
 </head>
+
 <body>
     <%- include('../partials/nav') %>
-
-    <h1>Edit Account</h1>
-    <form action="?_method=PUT" method="POST">
-        <label for="username">Username:</label>
-        <input type="text" name="username" id="username" value="<%= user.username %>" />
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email" value="<%= user.email %>" />
-        <label for="firstName">First Name:</label>
-        <input type="text" name="firstName" id="firstName" value="<%= user.firstName %>" />
-        <label for="lastName">Last Name:</label>
-        <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>" />
-        <label for="password">Password:</label>
-        <input type="password" name="password" id="password" />
-        <label for="confirmPassword">Confirm Password:</label>
-        <input type="password" name="confirmPassword" id="confirmPassword" />
-        <button type="submit" class="btn">Update</button>
-    </form>
+        <div class="container">
+            <div class="card">
+                <div class="card-content">
+                    <header>
+                        <h1>Edit Account</h1>
+                    </header>
+                    <form action="?_method=PUT" method="POST">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username" value="<%= user.username %>" />
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" value="<%= user.email %>" />
+                        <label for="firstName">First Name:</label>
+                        <input type="text" name="firstName" id="firstName" value="<%= user.firstName %>" />
+                        <label for="lastName">Last Name:</label>
+                        <input type="text" name="lastName" id="lastName" value="<%= user.lastName %>" />
+                        <label for="location">Location:</label>
+                        <input type="text" name="location" id="location" value="<%= user.location %>" />
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password" />
+                        <a href="/users/changepassword" class="btn waves-effect waves-light orange">Change Password</a>
+                        <button type="submit" class="btn">Update</button>
+                        <a href="/users/" class="btn">Cancel</a>
+                    </form>
+                </div>
+            </div>
 </body>

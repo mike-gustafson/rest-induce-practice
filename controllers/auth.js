@@ -33,11 +33,10 @@ exports.register = (req, res) => {
 }
 
 exports.createUser = async (req, res) => {
-    const { username, password } = req.body;
-    // const { isPasswordValid, errors } = validatePassword(password);
-    // if (!isPasswordValid) {
-    //     return res.render('auth/register', { title: 'Register', errors });
-    // }
+    const { username, password, confirmPassword } = req.body;
+    if (password !== confirmPassword) {
+        res.render('auth/register', { title: 'Register', error: 'Passwords do not match' });
+    }
     const doesUserExist = await User.findOne({ username: username });
     if (doesUserExist) {
         res.render('auth/register', { title: 'Register', error: 'User already exists' });

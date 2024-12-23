@@ -42,9 +42,10 @@ exports.update = async (req, res) => {
         const updatedUser = {
             username: req.body.username,
             email: req.body.email,
-            password: updatedPassword,
+            password: updatedPassword || req.session.user.password, 
             firstName: req.body.firstName,
             lastName: req.body.lastName,
+            location: req.body.location
         }
         const user = await User.findByIdAndUpdate(id, updatedUser);
         if (user) {
@@ -57,4 +58,8 @@ exports.update = async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server Error');
     }
+}
+
+exports.changePassword = (req, res) => {
+    res.render('account/changePassword', { title: 'Change Password' });
 }
